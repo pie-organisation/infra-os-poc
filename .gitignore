@@ -1,0 +1,12 @@
+# Ignore le rootfs complet
+exmple-os/rootfs/
+guest-os/rootfs/
+host-os/rootfs/
+
+# Ignore les caches
+**/var/cache/
+**/var/lib/apt/lists/partial/
+
+# Ignore fichiers temporaires
+*.log
+*.tmp
