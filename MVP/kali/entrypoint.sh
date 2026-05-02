@@ -15,4 +15,4 @@ startxfce4 &
 x11vnc -display :0 -nopw -forever -shared -rfbport 5900 &
 
 # 4) Lancer noVNC (websockify) en avant-plan sur 8080
-websockify --web=/usr/share/novnc/ 8080 localhost:5900
+websockify --web=/usr/share/novnc/ $PORT localhost:5900
