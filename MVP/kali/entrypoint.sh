@@ -22,4 +22,5 @@ x11vnc -display :0 -nopw -forever -shared -rfbport 5900 &
 sleep 2
 
 echo "Starting noVNC on port $PORT..."
+# On ne met pas de '&' ici pour que le processus reste au premier plan
 websockify --web=/usr/share/novnc/ $PORT localhost:5900
