@@ -1,18 +1,25 @@
 #!/bin/bash
 set -e
 
-# Afficher les logs sur stdout/stderr
+PORT=${PORT:-8080}
+
+# Logs
 exec > >(tee /var/log/entrypoint.log) 2>&1
 
-# 1) Démarrer Xvfb sur DISPLAY :0
+# 1) DISPLAY
 export DISPLAY=:0
+
+echo "Starting Xvfb..."
 Xvfb :0 -screen 0 1280x800x16 &
+sleep 2
 
-# 2) Démarrer le bureau XFCE sous cet affichage
+echo "Starting XFCE..."
 startxfce4 &
+sleep 2
 
-# 3) Lancer x11vnc pour partager :0 sur le port 5900
+echo "Starting x11vnc..."
 x11vnc -display :0 -nopw -forever -shared -rfbport 5900 &
+sleep 2
 
-# 4) Lancer noVNC (websockify) en avant-plan sur 8080
+echo "Starting noVNC on port $PORT..."
 websockify --web=/usr/share/novnc/ $PORT localhost:5900
